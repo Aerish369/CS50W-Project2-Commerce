@@ -1,8 +1,14 @@
-from django.contrib.auth import authenticate, login, logout
-from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.db import IntegrityError
+from django.shortcuts import render, redirect
 from django.urls import reverse
+
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
+from .forms import ListingsForm
+
+
 
 from .models import User
 
@@ -61,3 +67,22 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+
+@login_required(login_url='login')
+def createListing(request):
+    form = ListingsForm()
+
+    if request.method == 'POST':
+        form = ListingsForm(request.POST)
+        if form.is_valid:
+            listing = form.save(commit=False)
+            listing.owner = request.user
+            listing.save()
+
+            return redirect('index')
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'auctions/add-listing.html', context)
