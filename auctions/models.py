@@ -28,7 +28,8 @@ class Listings(models.Model):
         description = models.TextField(max_length=500, blank=True, null=True)
         category = models.CharField(max_length=60, null=True, blank=True, choices=category)
         bid_price = models.IntegerField(blank=True, null=True)
-        image = models.ImageField(null=True, blank=True)
+        image = models.ImageField(null=True, blank=True, upload_to='listing-image')
+        created = models.DateTimeField(auto_now_add=True)
         
 
         def __str__(self):

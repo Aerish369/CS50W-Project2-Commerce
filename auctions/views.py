@@ -10,11 +10,15 @@ from .forms import ListingsForm
 
 
 
-from .models import User
+from .models import User, Listings
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    listings = Listings.objects.all()
+    context = {
+        'listings': listings,
+    }
+    return render(request, "auctions/index.html", context)
 
 
 def login_view(request):
@@ -74,7 +78,7 @@ def createListing(request):
     form = ListingsForm()
 
     if request.method == 'POST':
-        form = ListingsForm(request.POST)
+        form = ListingsForm(request.POST, request.FILES)
         if form.is_valid:
             listing = form.save(commit=False)
             listing.owner = request.user
