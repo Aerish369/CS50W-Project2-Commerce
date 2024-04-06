@@ -29,7 +29,7 @@ class Listings(models.Model):
                 ('None', 'None'),
         )
 
-        owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+        owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
         title = models.CharField(max_length=60)
         description = models.TextField(max_length=500, blank=True, null=True)
         category = models.CharField(max_length=60, null=True, blank=True, choices=category)
@@ -42,9 +42,12 @@ class Listings(models.Model):
                 return f"{self.id} {self.title}"
         
 class Bid(models.Model):
-        pass
-        # def __str__(self):
-        #         return ""
+        bid_amount = models.IntegerField(default=None)
+        bid_owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+        big_listing = models.ForeignKey(Listings, on_delete=models.CASCADE, default=None)
+
+        def __str__(self):
+                return f"{self.bid_owner} -- {self.bid_amount}"
         
 
 class Comments(models.Model):
