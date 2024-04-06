@@ -14,6 +14,7 @@ urlpatterns = [
 
     #! Crud of the listings
     path('create-listing', views.createListing, name='create-listing'),
+    path('listing/<int:pk>/', views.listing, name='listing'),
 ]
 
 

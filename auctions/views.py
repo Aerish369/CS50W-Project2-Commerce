@@ -90,3 +90,12 @@ def createListing(request):
         'form': form,
     }
     return render(request, 'auctions/add-listing.html', context)
+
+
+def listing(request, pk):
+    listingObj = Listings.objects.get(id=pk)
+
+    context ={
+        'listing': listingObj,
+    }
+    return render(request, 'auctions/listing.html', context)

@@ -5,3 +5,37 @@ body {
     margin: 0;
     padding: 20px;
         }
+
+.listingimg {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.listingimg {
+    margin-top: -30px;
+    text-align: center;
+    margin-left: 515px;
+    background-color: transparent;
+}
+
+.listingimg img{
+    max-width: 150%;
+    height: auto;
+}
+
+
+/* .listingimg {
+    flex: 0 0 auto;
+    padding-right: 20px;
+}
+
+
+.listinimg img {
+    max-width: 266px;
+    max-height: 168px;
+    width: auto;
+    height: auto;
+    display: block; */
+/* } */

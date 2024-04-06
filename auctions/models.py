@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+import uuid
 
 
 class User(AbstractUser):
@@ -22,6 +23,11 @@ class Listings(models.Model):
                 ('Clearance', 'Clearance'),
 
         )
+        watchlist = (
+                ('True', 'True'),
+                ('False', 'False'),
+                ('None', 'None'),
+        )
 
         owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
         title = models.CharField(max_length=60)
@@ -33,7 +39,7 @@ class Listings(models.Model):
         
 
         def __str__(self):
-                return f"{self.title}"
+                return f"{self.id} {self.title}"
         
 class Bid(models.Model):
         pass

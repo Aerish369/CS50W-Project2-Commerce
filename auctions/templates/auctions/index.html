@@ -13,15 +13,19 @@
     {% for listing in listings %}
         <div class="card">
             <div class="image">
+              <a href="{% url 'listing' listing.id %}">
               <img src="{{listing.image.url}}" alt="{{listing.title}}'s' image">
+              </a>
             </div>
             <div class="card-content">
+              <a href="{% url 'listing' listing.id %}">
               <h2 class="card-title">{{listing.title.capitalize}}</h2>
               <p class="card-category">{{listing.category}}</p>
               <p class="card-description">{{listing.description|slice:'150'}}</p>
               <p class="card-created">{{listing.created}}</p>
+              </a>
             </div>
         </div>
-        <br>
+        <br> 
     {% endfor %}
-{% endblock %}
+{% endblock body %}
