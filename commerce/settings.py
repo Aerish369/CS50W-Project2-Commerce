@@ -128,3 +128,5 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/')
+
+AUTH_USER_MODEL='auctions.User'

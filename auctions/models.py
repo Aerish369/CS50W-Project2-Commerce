@@ -4,6 +4,13 @@ import uuid
 
 
 class User(AbstractUser):
+        first_name=models.CharField(max_length=200)
+        last_name=models.CharField(max_length=200)
+        email=models.EmailField(unique=True)
+
+        USERNAME_FIELD='email'
+        REQUIRED_FIELDS=['first_name','last_name','username']
+
 
         def __str__(self):
                 return f"{self.username}"
@@ -44,7 +51,7 @@ class Listings(models.Model):
 class Bid(models.Model):
         bid_amount = models.IntegerField(default=None)
         bid_owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-        big_listing = models.ForeignKey(Listings, on_delete=models.CASCADE, default=None)
+        bid_listing = models.ForeignKey(Listings, on_delete=models.CASCADE, default=None)
 
         def __str__(self):
                 return f"{self.bid_owner} -- {self.bid_amount}"

@@ -21,6 +21,36 @@
     <div class="listingimg">
         <img src="{{listing.image.url}}" alt="{{listing.title}}'s image">
     </div>
+
+    <!--Bid Section-->
+    {% if request.user != listing.owner %}
+
+        <form action="" method="POST" >
+            {% csrf_token %}
+            <div style="display: flex;" class="bid" >
+                
+                {% if listing.bid_price is None %}
+
+                <p style="margin-right: 5px;">$</p>
+                <input style=" width: 60px;" maxlength="6" type="text" value="0" name="bid_amount">
+                <input type="submit" value="Bid">
+
+                {% else %}
+                    <p style="margin-right: 5px;">$</p>
+                    <input style=" width: 60px;" maxlength="6" type="text" value="{{listing.bid_price}}" name="bid_amount">
+                    <input type="submit" value="Bid">
+                {% endif %}
+            </div>
+        </form>
+    {% else %}
+
+    <form action="" method="POST" >
+        {% csrf_token %}
+        <input type="submit" value="Close Bid">
+    </form>
+
+    {% endif %}
+  
 </div>
 
 

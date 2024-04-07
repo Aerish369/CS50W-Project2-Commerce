@@ -8,9 +8,9 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import ListingsForm
 
+from django.contrib import messages
 
-
-from .models import User, Listings
+from .models import User, Listings, Bid
 
 
 def index(request):
@@ -95,7 +95,20 @@ def createListing(request):
 def listing(request, pk):
     listingObj = Listings.objects.get(id=pk)
 
+    if request.method == 'POST':
+        bid_amount = request.POST.get('bid_amount')
+        if bid_amount:
+            if int(bid_amount)>listingObj.bid_price:    
+                new_bid = Bid.objects.create(bid_amount=int(bid_amount), bid_owner=request.user, bid_listing=listingObj)
+                listingObj.bid_price = int(bid_amount)
+                listingObj.save()
+                messages.success(request, "Bid placed! You are the highest bidder now. ")
+            else:
+                messages.error(request, "Bidding should be higher than previous bid.")
+
+    
     context ={
         'listing': listingObj,
+        'bid_amount' : request.POST.get('bid_amount'),     
     }
     return render(request, 'auctions/listing.html', context)
