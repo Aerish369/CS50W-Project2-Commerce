@@ -11,6 +11,7 @@
     <hr>
 
     {% for listing in listings %}
+      {% if listing.is_active == True %}
         <div class="card">
             <div class="image">
               <a href="{% url 'listing' listing.id %}">
@@ -27,5 +28,6 @@
             </div>
         </div>
         <br> 
+      {% endif %}
     {% endfor %}
 {% endblock body %}
