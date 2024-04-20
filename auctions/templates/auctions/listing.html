@@ -31,76 +31,79 @@
   </div>
 
 </div>
+
+
+
 <!--Bid Section-->
 {% if request.user.id ==  listing.owner.id %}
-  <p>You are the owner of this listing and cannot bid on your own listing.</p>
-  {% if listing.is_active == True %}
-  <!--Close Bid-->
-  <form action="{% url 'close-listing' listing.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Close Bid" />
-  </form>
-  {% else %}
-  <p>Listing Closed! </p>
-  {% endif %}
-
-{% elif request.user.is_authenticated %}
-  {% if listing.is_active == True %}
-  <form action="" method="POST">
-    {% csrf_token %}
-    <div style="display: flex" class="bid">
-      {% if listing.bid_price is None %}
-
-      <p style="margin-right: 5px">$</p>
-      <input
-        style="width: 60px"
-        maxlength="6"
-        type="text"
-        value="0"
-        name="bid_amount"
-      />
-      <input type="submit" value="Bid" />
-
+    
+    {% if listing.is_active == True %}
+      <!--Close Bid-->
+      <p>You are the owner of this listing and cannot bid on your own listing.</p>
+      <form action="{% url 'close-listing' listing.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Close Bid" />
+      </form>
       {% else %}
-      <p style="margin-right: 5px">$</p>
-      <input
-        style="width: 60px"
-        maxlength="6"
-        type="text"
-        value="{{listing.bid_price}}"
-        name="bid_amount"
-      />
-      <input type="submit" value="Bid" />
-      {% endif %}
-    </div>
-  </form>
-  {%endif%}
-  
+      <p>Listing Closed! 1</p>
+    {% endif %}
 
+  {% elif request.user.is_authenticated %}
+    {% if listing.is_active == True %}
+    <!--Bidding Box-->
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div style="display: flex" class="bid">
+          {% if listing.bid_price is None %}
 
+            <p style="margin-right: 5px">$</p>
+            <input
+              style="width: 60px"
+              maxlength="6"
+              type="text"
+              value="0"
+              name="bid_amount"
+            />
+            <input type="submit" value="Bid" />
+
+            {% else %}
+            <p style="margin-right: 5px">$</p>
+            <input
+              style="width: 60px"
+              maxlength="6"
+              type="text"
+              value="{{listing.bid_price}}"
+              name="bid_amount"
+            />
+            <input type="submit" value="Bid" />
+          {% endif %}
+        </div>
+      </form>
+      {% else %}
+      <p>Listing Closed! 2</p>
+    {%endif%}
   
 {% endif %}
 
-<h1>{{ request.user }}</h1>
-<h2>{{ highestBidder }}</h2>
+<h1>Logged In User - {{ request.user }}</h1>
 
-{% if request.user == highestBidder %}
+<!--Winning Bid Logic-->
 
-  {% if highestBidder and highestBidAmount %}
-    <p>Highest Bidder - {{ highestBidder }}</p>
-    <p>Highest Bid Amount - ${{ highestBidAmount }}</p>
-    {% if listing.is_active == False %}
+{% if listing.is_active == False%}
+
+  <div class="win-bid">
+  {% if request.user.id == listing.highest_bid.bid_owner.id %}
       <p>
-        Congratulations, {{ highestBidder }}! You have won the bid. You can purchase the listed item <a href="#">here</a>
+        Congratulations, {{ listing.highest_bid.bid_owner }}! You have won the bid. You can purchase the listed item <a href="#">here</a>
       </p>
-    {% else %}
+    {% elif request.user.is_authenticated == False %}
       <p>
-        Sorry, The listing is closed. And Highest Bidder won the listing. 
+        Listing is closed. You can login to see other listings <a href="#">here</a>.
       </p>
-    {% endif %}
-  {% else %}
-      <p>Biddings Closed! No bidding were made!</p>
   {% endif %}
+  </div>
+  
+
 {% endif %}
 
 

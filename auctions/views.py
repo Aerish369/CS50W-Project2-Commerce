@@ -123,13 +123,10 @@ def closeListing(request, pk):
         listingObj.save()
         messages.success(request, "Bidding Closed !!! ")
     else:
-        return render(request, 'auctions/listing.html', {"listing": listingObj, "highestBidAmount": highestBidAmount, "highestBidder": highestBidder,})
+        return render(request, 'auctions/listing.html', {"listing": listingObj})
 
     context ={
         "listing": listingObj,
-        "highestBidAmount": highestBidAmount,
-        "highestBidder": highestBidder,
-
     }
     return render(request, 'auctions/listing.html', context) 
 
