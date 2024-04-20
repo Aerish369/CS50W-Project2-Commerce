@@ -23,11 +23,6 @@ class Listings(models.Model):
                 ('Clearance', 'Clearance'),
 
         )
-        watchlist = (
-                ('True', 'True'),
-                ('False', 'False'),
-                ('None', 'None'),
-        )
 
         owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
         title = models.CharField(max_length=60)
@@ -40,6 +35,10 @@ class Listings(models.Model):
 
         def __str__(self):
                 return f"{self.title} by {self.owner}"
+        
+        @property
+        def highest_bid(self):
+                return Bid.objects.filter(bid_listing=self).order_by('-bid_amount').first()
 
 
         

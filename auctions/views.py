@@ -115,32 +115,21 @@ def bidListing(request, pk):
     return render(request, 'auctions/listing.html', context)
 
 def closeListing(request, pk):
+
     listingObj = Listings.objects.get(id = pk)
-
-    highestBidder, highestBidAmount = getHighestBidder(pk)
     
-
     if request.method == 'POST':
         listingObj.is_active = False
         listingObj.save()
         messages.success(request, "Bidding Closed !!! ")
-
-    
+    else:
+        return render(request, 'auctions/listing.html', {"listing": listingObj, "highestBidAmount": highestBidAmount, "highestBidder": highestBidder,})
 
     context ={
         "listing": listingObj,
         "highestBidAmount": highestBidAmount,
         "highestBidder": highestBidder,
+
     }
-    return render(request, 'auctions/listing.html', context)
+    return render(request, 'auctions/listing.html', context) 
 
-
-def getHighestBidder(closeListing_id):
-        highestBid = Bid.objects.filter(bid_listing_id=closeListing_id).aggregate(Max('bid_amount'))
-        highestBidAmount = highestBid['bid_amount__max']
-
-        if highestBidAmount is not None:
-            highestBidder = Bid.objects.get(bid_listing_id=closeListing_id, bid_amount=highestBidAmount).bid_owner
-            return highestBidder, highestBidAmount
-        else:
-            return None, None

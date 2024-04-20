@@ -1,7 +1,12 @@
-{% extends 'auctions/layout.html' %} 
-{% block title %} Active Listings {% endblock %} 
+{% extends 'auctions/layout.html' %} {% block title %} Active Listings {%endblock %} {% block body %}
 
-{% block body %}
+<!--See who's the highest Bidder Now for debugging purpuses-->
+{% if listing.highest_bid %}
+  <h1>{{listing.highest_bid.bid_owner}}</h1>
+{% endif %}
+{% if listing.highest_bid %}
+  <h1>{{listing.highest_bid.bid_amount}}</h1>
+{% endif %}
 
 <div class="container">
   <h1>{{listing.title}}</h1>
@@ -25,9 +30,22 @@
     <img src="{{listing.image.url}}" alt="{{listing.title}}'s image" />
   </div>
 
-  <!--Bid Section-->
-  {% if request.user != listing.owner %}
+</div>
+<!--Bid Section-->
+{% if request.user.id ==  listing.owner.id %}
+  <p>You are the owner of this listing and cannot bid on your own listing.</p>
+  {% if listing.is_active == True %}
+  <!--Close Bid-->
+  <form action="{% url 'close-listing' listing.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Close Bid" />
+  </form>
+  {% else %}
+  <p>Listing Closed! </p>
+  {% endif %}
 
+{% elif request.user.is_authenticated %}
+  {% if listing.is_active == True %}
   <form action="" method="POST">
     {% csrf_token %}
     <div style="display: flex" class="bid">
@@ -56,29 +74,73 @@
       {% endif %}
     </div>
   </form>
-  {% else %}
-<!--Close Bid-->
-  <form action="{% url 'close-listing' listing.id %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Close Bid" />
-  </form>
+  {%endif%}
+  
 
-  {% endif %}
-</div>
-{% if listing.is_active == False %}
-<p>Listing is closed</p>
+
+  
 {% endif %}
 
-<p>Highest Bid der- {{highestBidder}}</p>
-<p>Highest Bid Amount - {{highestBidAmount}}</p>
-  <!--Save to Watchlist-->
-  {% comment %} <input type="checkbox" checked="checked" id="favorite" name="favorite-checkbox" value="favorite-button">
-  <label for="favorite" class="favorite">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-    <div class="action">
-      <span class="option-1">Add to Favorites</span>
-      <span class="option-2">Added to Favorites</span>
-    </div>
-  </label>  {% endcomment %}
+<h1>{{ request.user }}</h1>
+<h2>{{ highestBidder }}</h2>
+
+{% if request.user == highestBidder %}
+
+  {% if highestBidder and highestBidAmount %}
+    <p>Highest Bidder - {{ highestBidder }}</p>
+    <p>Highest Bid Amount - ${{ highestBidAmount }}</p>
+    {% if listing.is_active == False %}
+      <p>
+        Congratulations, {{ highestBidder }}! You have won the bid. You can purchase the listed item <a href="#">here</a>
+      </p>
+    {% else %}
+      <p>
+        Sorry, The listing is closed. And Highest Bidder won the listing. 
+      </p>
+    {% endif %}
+  {% else %}
+      <p>Biddings Closed! No bidding were made!</p>
+  {% endif %}
+{% endif %}
+
+
+
+
+
+
+
+<!--Save to Watchlist-->
+{% comment %}
+<input
+  type="checkbox"
+  checked="checked"
+  id="favorite"
+  name="favorite-checkbox"
+  value="favorite-button"
+/>
+<label for="favorite" class="favorite">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="feather feather-heart"
+  >
+    <path
+      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+    ></path>
+  </svg>
+  <div class="action">
+    <span class="option-1">Add to Favorites</span>
+    <span class="option-2">Added to Favorites</span>
+  </div>
+</label>
+{% endcomment %} 
+
 
 {% endblock %}
