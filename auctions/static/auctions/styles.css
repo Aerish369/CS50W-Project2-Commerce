@@ -38,7 +38,7 @@ body {
     width: 10%;
     margin-left: 378px;
     position: relative;
-    bottom: 470px;
+    bottom: 422px;
 }
 
 
@@ -50,7 +50,7 @@ body {
     width: 27%;
     margin-left: 378px;
     position: relative;
-    bottom: 520px;
+    bottom: 455px;
     right: 15px;
     padding-top: 5%;
 }
@@ -64,15 +64,22 @@ body {
 
 #listing-closed-1 {
     position: relative;
-    bottom: 471px;
+    bottom: 466px;
     left: 380px;
 }
 
 #listing-closed-2 {
     position: relative;
-    bottom: 471px;
+    bottom: 466px;
     left: 380px;
 }
+
+#winner-closing {
+    position: relative;
+    bottom: 466px;
+    left: 380px;
+}
+
 
 #listing-closed-3 {
     position: relative;

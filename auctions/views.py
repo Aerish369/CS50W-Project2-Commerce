@@ -130,3 +130,16 @@ def closeListing(request, pk):
     }
     return render(request, 'auctions/listing.html', context) 
 
+
+# def addRemoveWatchlist(request, pk):
+#     if request.method == 'POST':
+#         listing_id = request.POST.get('listing.id')
+#         listing = Listings.objects.get(id=listing_id)
+#         if request.user in listing.in_watchlist.all():
+#             listing.in_watchlist.remove(request.user)
+#             listing.save()
+#         else:
+#             listing.in_watchlist.add(request.user)
+#             listing.save()
+
+#     return render(request, 'auctions/watchlist.html')  
