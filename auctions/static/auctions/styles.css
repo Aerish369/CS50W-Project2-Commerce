@@ -41,21 +41,43 @@ body {
     bottom: 470px;
 }
 
+
 .close-bid {
-    
     color: black;
     display: flex;
     padding: 15px;
-    width: 10%;
+    padding-right: 100px;
+    width: 27%;
     margin-left: 378px;
     position: relative;
-    bottom: 470px;
+    bottom: 520px;
+    right: 15px;
+    padding-top: 5%;
 }
 
 #own-listing {
+    
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 45px;
+    left: 14px;
+}
+
+#listing-closed-1 {
+    position: relative;
+    bottom: 471px;
+    left: 380px;
+}
+
+#listing-closed-2 {
+    position: relative;
+    bottom: 471px;
+    left: 380px;
+}
+
+#listing-closed-3 {
+    position: relative;
+    bottom: 471px;
+    left: 380px;
 }
 
 #dollar {
