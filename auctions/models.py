@@ -52,7 +52,7 @@ class Bid(models.Model):
         
 
 class Comments(models.Model):
-        owner= models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+        owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
         listing = models.ForeignKey(Listings, on_delete=models.CASCADE, default=None)
         body = models.TextField(max_length=400, blank=True, null=True)
         created = models.DateTimeField(auto_now_add=True, null=True)
@@ -60,4 +60,7 @@ class Comments(models.Model):
 
         def __str__(self):
             return f"{self.owner} -> {self.listing}"
+        
+        class Meta:
+            ordering = ['-created']
         

@@ -134,8 +134,10 @@
 {% if request.user.is_authenticated %}
 <form action="{% url 'comment' listing.id %}" method="POST">
   {% csrf_token %}
-  <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+  {% for field in form %}
+  {{field}}
   <input type="submit" value="Comment" />
+  {%endfor%}
 </form>
 {% else %}
 <p>You must be signed in to comment.</p>
@@ -145,15 +147,18 @@
 
 {% for comment in comments %}
 <div class="comment">
-  
+
   <p>{{ comment.owner }}</p>
   <p>{{ comment.body }}</p>
-  
+  <p>{{ comment.created }}</p>
+
+  <br>
   <hr>
+  
 </div>
 {% endfor %}
 
 
-<br>
+
 
 {% endblock %}
