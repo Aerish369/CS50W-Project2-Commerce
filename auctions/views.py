@@ -6,11 +6,11 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .forms import ListingsForm
+from .forms import ListingsForm, CommentsForm
 
 from django.contrib import messages
 
-from .models import User, Listings, Bid
+from .models import User, Listings, Bid, Comments
 from django.db.models import Max
 
 
@@ -143,3 +143,26 @@ def closeListing(request, pk):
 #             listing.save()
 
 #     return render(request, 'auctions/watchlist.html')  
+
+
+def addComment(request, pk):
+    listingObj = Listings.objects.get(id=pk)
+    form = CommentsForm()
+
+    if request.method == 'POST':
+        form = CommentsForm(request.POST)
+        
+        comment = form.save(commit=False)
+        comment.owner = request.user
+        comment.listing = listingObj
+        comment.save()
+
+        messages.success(request, "Comment added successfully.")
+        return redirect('comment', pk=pk)
+
+    context = {
+        'form': form,
+        'comments': Comments.objects.filter(listing=listingObj),
+        'listing': listingObj,
+    }
+    return render(request, 'auctions/listing.html', context)
