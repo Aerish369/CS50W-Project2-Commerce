@@ -30,6 +30,48 @@ body {
     margin-right: 944px;
 }
 
+.bid {
+    
+    color: white;
+    display: flex;
+    padding: 15px;
+    width: 10%;
+    margin-left: 378px;
+    position: relative;
+    bottom: 470px;
+}
+
+.close-bid {
+    
+    color: black;
+    display: flex;
+    padding: 15px;
+    width: 10%;
+    margin-left: 378px;
+    position: relative;
+    bottom: 470px;
+}
+
+#own-listing {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+#dollar {
+    color: black;
+    position: absolute;
+    top: 17px;
+    left: 3px;
+}
+
+#bid-submit {
+    position: absolute;
+    top: 15px;
+    left: 81px;
+}
+  
+
 /* label {
     background-color: white;
     display: flex;
