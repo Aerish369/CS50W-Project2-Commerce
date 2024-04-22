@@ -99,8 +99,15 @@ body {
     top: 15px;
     left: 81px;
 }
-  
 
+
+.watchlist {
+    position: relative;
+    bottom: 110px;
+    left: 690px;
+    padding-left: 17px;
+    margin-right: 1642px;
+}
 /* label {
     background-color: white;
     display: flex;

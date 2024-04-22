@@ -18,7 +18,7 @@ urlpatterns = [
     path('close-listing/<int:pk>/', views.closeListing, name='close-listing'),
 
     #! Watchlist
-    # path('watchlist/<int:pk>/', views.addRemoveWatchlist, name='watchlist'),
+    path('watchlist/<int:pk>/', views.addRemoveWatchlist, name='watchlist'),
 
     path('comment/<int:pk>/', views.addComment, name='comment'),
 ]

@@ -113,35 +113,44 @@
 
 {% endif %}
 
+<!--Watchlist Section-->
 
-{% comment %} {% if request.user.is_authenticated %}
+{% if request.user.is_authenticated %}
   {% if request.user.watchlist.count == 0 %}
-    <form action="{% url 'watchlist' listing.id %}" method="POST" name="">
-      {% csrf_token %}
-      <input type="submit" value="Add to Watchlist" />
-    </form>
-  {% else %}
-    <form action="{% url 'watchlist' listing.id %}" method="POST">
-      {% csrf_token %}
-      <input type="submit" value="Remove from Watchlist" />
-    </form>
+    <div class="watchlist">
+      <form action="{% url 'watchlist' listing.id %}" method="POST" name="">
+        {% csrf_token %}
+        <input type="submit" value="Add to Watchlist" />
+      </form>
+    </div>
+    {% else %}
+    <div class="watchlist">
+      <form action="{% url 'watchlist' listing.id %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Remove from Watchlist" />
+      </form>
+    </div>
+  {% endif %} 
+{% endif %}
 
-  {% endif %} {% endcomment %}
-{% comment %} {% endif %} {% endcomment %}
 
+<!--Comments Section-->
 <h2>Comments</h2>
 
 {% if request.user.is_authenticated %}
-<form action="{% url 'comment' listing.id %}" method="POST">
-  {% csrf_token %}
-  {% for field in form %}
-  {{field}}
-  <input type="submit" value="Comment" />
-  {%endfor%}
-</form>
+<p>Comment as {{ request.user.username }}</p>
+<div class="comment-form">
+  <form action="{% url 'comment' listing.id %}" method="POST">
+      {% csrf_token %}
+      {% for field in form %}
+      {{field}}
+      <input type="submit" value="Comment" />
+      {%endfor%}
+  </form>
+</div>
 {% else %}
 <p>You must be signed in to comment.</p>
-{% endif %}
+{% endif %} 
 
 <hr>
 
