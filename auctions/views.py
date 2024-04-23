@@ -95,6 +95,8 @@ def createListing(request):
 
 def bidListing(request, pk):
     listingObj = Listings.objects.get(id=pk)
+    comment_form = CommentsForm()
+    all_comments = Comments.objects.filter(listing=listingObj)
 
     if request.method == 'POST':
         bid_amount = request.POST.get('bid_amount')
@@ -110,9 +112,12 @@ def bidListing(request, pk):
     
     context ={
         'listing': listingObj,
-        'bid_amount' : request.POST.get('bid_amount'),     
+        'bid_amount' : request.POST.get('bid_amount'),
+        'form': comment_form,
+        'comments': all_comments,     
     }
     return render(request, 'auctions/listing.html', context)
+
 
 def closeListing(request, pk):
 
@@ -142,6 +147,7 @@ def addRemoveWatchlist(request, pk):
         else:
             listing.in_watchlist.add(request.user)
             listing.save()
+
     context = {
         'listing': listingObj,
     }
@@ -149,25 +155,36 @@ def addRemoveWatchlist(request, pk):
     return render(request, 'auctions/listing.html', context)  
 
 
+def viewWatchlist(request):
+    allWatchlist = Listings.objects.filter(in_watchlist=request.user)
+
+    context = {
+        'watchlist': allWatchlist,
+    }
+    return render(request, 'auctions/watchlist.html', context)
+
+
 def addComment(request, pk):
     listingObj = Listings.objects.get(id=pk)
-    form = CommentsForm()
+    all_comments = Comments.objects.filter(listing=listingObj)
+    comment_form = CommentsForm()
 
     if request.method == 'POST':
         form = CommentsForm(request.POST)
-        
-        comment = form.save(commit=False)
-        comment.owner = request.user
-        comment.listing = listingObj
-        comment.save()
+        if form.is_valid():
+            if form.cleaned_data['body'] != '':
+                comment = form.save(commit=False)
+                comment.owner = request.user
+                comment.listing = listingObj
+                comment.save()
 
-        messages.success(request, "Comment added successfully.")
-        return redirect('comment', pk=pk)
-
-    comments = Comments.objects.filter(listing=listingObj)
-    context = {
-        'form': form,
-        'comments': comments,
+                messages.success(request, "Comment added successfully.")
+                return HttpResponseRedirect(reverse('listing', args=(pk,)))
+            else:
+                messages.error(request, "Comment cannot be empty.")
+                return HttpResponseRedirect(reverse('listing', args=(pk,)))
+    
+    return render(request, 'auctions/listing.html', {
         'listing': listingObj,
-    }
-    return render(request, 'auctions/listing.html', context)
+        'form': comment_form,
+        'comments': all_comments,     })

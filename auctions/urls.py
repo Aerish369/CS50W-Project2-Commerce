@@ -19,6 +19,7 @@ urlpatterns = [
 
     #! Watchlist
     path('watchlist/<int:pk>/', views.addRemoveWatchlist, name='watchlist'),
+    path('watchlist/', views.viewWatchlist, name='view-watchlist'),
 
     path('comment/<int:pk>/', views.addComment, name='comment'),
 ]
