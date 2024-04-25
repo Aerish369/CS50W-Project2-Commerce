@@ -4,11 +4,25 @@
 
 {% block body %}
 
-<h1>Category Listings</h1>
+<h1>Listings with Categories</h1>
+<br>
+<hr>
+{% for category, listings in listings_with_categories.items %}
+    <h2>{{ category.title }}</h2>
+    <ul>
+        {% for listing in listings %}
+            <li>{{ listing.title }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
 
+{% comment %} {% for category in categories.listing_set.get(id=listing.id) %}
 
-    {{ listing.get_category_display }}
+<h3><a href="#">{{ category.title }}</a></h3>
+<br>
+<hr>
 
+{% endfor %} {% endcomment %}
 
 
 {% endblock body %}

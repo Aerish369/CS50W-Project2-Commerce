@@ -23,7 +23,9 @@ urlpatterns = [
 
     path('comment/<int:pk>/', views.addComment, name='comment'),
 
-    path('categories/', views.viewCategories, name='categories'),
+    #! Categories
+    path('categories/', views.listCategories, name='categories'),
+    path('categories/<int:pk>/', views.viewCategories, name='view-categories'),
 ]
 
 

@@ -10,7 +10,7 @@ from .forms import ListingsForm, CommentsForm
 
 from django.contrib import messages
 
-from .models import User, Listings, Bid, Comments
+from .models import User, Listings, Bid, Comments, Category
 from django.db.models import Max
 
 
@@ -192,9 +192,26 @@ def addComment(request, pk):
         'comments': all_comments,     })
 
 
-def viewCategories(request):
+def viewCategories(request, category_id=None):
     listings = Listings.objects.all()
+    categories = Category.objects.all()
+    
+    # If a category is selected, filter listings by that category
+    if category_id:
+        category = get_object_or_404(Category, pk=category_id)
+        listings = listings.filter(category=category)
+
+
     context = {
         'listings': listings,
+        'categories': categories,
     }
     return render(request, 'auctions/categories.html', context)
+
+
+def listCategories(request):
+    categories = Category.objects.all()
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'auctions/listcategories.html', context)
