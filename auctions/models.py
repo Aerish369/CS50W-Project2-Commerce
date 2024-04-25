@@ -9,25 +9,19 @@ class User(AbstractUser):
                 return f"{self.username}"
 
 
+class Category(models.Model):
+       title = models.CharField(max_length=60, default='No category listed')
+
+       def __str__(self):
+              return f"{self.title}"
+       
 
 class Listings(models.Model):
-        category = (
-                ('Collectables', 'Collectables & Art'),
-                ('Costumes', 'Costumes'),
-                ('Props', 'Props'),
-                ('Figures', 'Figures'),
-                ('Home', 'Home & Decor'),
-                ('Accessories', 'Accessories & More'),
-                ('Games', 'Games & Puzzles'), 
-                ('Gift Cards', 'Gift Cards'),
-                ('Clearance', 'Clearance'),
-
-        )
 
         owner = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
         title = models.CharField(max_length=60)
-        description = models.TextField(max_length=500, blank=True, null=True)
-        category = models.CharField(max_length=60, null=True, blank=True, choices=category)
+        description = models.TextField(max_length=700, blank=True, null=True)
+        category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
         bid_price = models.IntegerField(blank=True, null=True)
         image = models.ImageField(null=True, blank=True, upload_to='listing-image', default='listing-image/default.jpg')
         is_active= models.BooleanField(default=True)

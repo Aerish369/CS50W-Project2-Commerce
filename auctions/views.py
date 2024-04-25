@@ -144,9 +144,11 @@ def addRemoveWatchlist(request, pk):
         if request.user in listing.in_watchlist.all():
             listing.in_watchlist.remove(request.user)
             listing.save()
+            return HttpResponseRedirect(reverse('listing', args=(pk,)))
         else:
             listing.in_watchlist.add(request.user)
             listing.save()
+            return HttpResponseRedirect(reverse('listing', args=(pk,)))
 
     context = {
         'listing': listingObj,
@@ -188,3 +190,11 @@ def addComment(request, pk):
         'listing': listingObj,
         'form': comment_form,
         'comments': all_comments,     })
+
+
+def viewCategories(request):
+    listings = Listings.objects.all()
+    context = {
+        'listings': listings,
+    }
+    return render(request, 'auctions/categories.html', context)

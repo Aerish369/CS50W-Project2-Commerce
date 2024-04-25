@@ -1,0 +1,14 @@
+{% extends 'auctions/layout.html' %} 
+{% load static %}
+{% block title %} Category Listings {%endblock %} 
+
+{% block body %}
+
+<h1>Category Listings</h1>
+
+
+    {{ listing.get_category_display }}
+
+
+
+{% endblock body %}

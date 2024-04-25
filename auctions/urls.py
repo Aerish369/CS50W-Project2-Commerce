@@ -22,6 +22,8 @@ urlpatterns = [
     path('watchlist/', views.viewWatchlist, name='view-watchlist'),
 
     path('comment/<int:pk>/', views.addComment, name='comment'),
+
+    path('categories/', views.viewCategories, name='categories'),
 ]
 
 

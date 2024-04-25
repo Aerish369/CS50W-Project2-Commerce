@@ -116,7 +116,7 @@
 <!--Watchlist Section-->
 
 {% if request.user.is_authenticated %}
-  {% if listing in request.user.watchlist %}
+  {% if listing in request.user.watchlist.all %}
     <div class="watchlist">
       <form action="{% url 'watchlist' listing.id %}" method="POST">
         {% csrf_token %}
