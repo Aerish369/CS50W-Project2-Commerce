@@ -13,6 +13,8 @@ from django.contrib import messages
 from .models import User, Listings, Bid, Comments, Category
 from django.db.models import Max
 
+from django.shortcuts import get_object_or_404
+
 
 def index(request):
     listings = Listings.objects.all()
@@ -193,18 +195,21 @@ def addComment(request, pk):
 
 
 def viewCategories(request, category_id=None):
-    listings = Listings.objects.all()
     categories = Category.objects.all()
-    
-    # If a category is selected, filter listings by that category
+    listings = Listings.objects.all()
+
     if category_id:
         category = get_object_or_404(Category, pk=category_id)
         listings = listings.filter(category=category)
 
+    listings_with_categories = {}
+    for category in categories:
+        listings_with_categories[category] = listings.filter(category=category)
 
     context = {
-        'listings': listings,
+        'listings_with_categories': listings_with_categories,
         'categories': categories,
+        'selected_category': category if category_id else None,
     }
     return render(request, 'auctions/categories.html', context)
 

@@ -10,7 +10,7 @@
 
 {% for category in categories %}
 
-<h3><a href="{% url 'view-categories' %}">{{ category.title }}</a></h3>
+<h3><a href="{% url 'view-categories' category.id %}">{{ category.title }}</a></h3>
 <br>
 <hr>
 

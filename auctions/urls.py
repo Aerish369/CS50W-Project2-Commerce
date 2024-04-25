@@ -25,7 +25,7 @@ urlpatterns = [
 
     #! Categories
     path('categories/', views.listCategories, name='categories'),
-    path('categories/<int:pk>/', views.viewCategories, name='view-categories'),
+    path('categories/<int:category_id>/', views.viewCategories, name='view-categories'),
 ]
 
 

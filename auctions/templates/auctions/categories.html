@@ -1,5 +1,6 @@
 {% extends 'auctions/layout.html' %} 
 {% load static %}
+{% block staticfile %} {% static "auctions/active-listings.css" %} {% endblock %}
 {% block title %} Category Listings {%endblock %} 
 
 {% block body %}
@@ -8,21 +9,37 @@
 <br>
 <hr>
 {% for category, listings in listings_with_categories.items %}
-    <h2>{{ category.title }}</h2>
-    <ul>
+    {% if category.id == selected_category.id %}
+        <h1>{{ selected_category.title }}</h1> 
+    {% endif %}
+    
         {% for listing in listings %}
-            <li>{{ listing.title }}</li>
-        {% endfor %}
-    </ul>
+
+            {% if listing.is_active == True %}
+                <div class="card">
+                    <div class="image">
+                        <a href="{% url 'listing' listing.id %}">
+                        <img src="{{listing.image.url}}" alt="{{listing.title}}'s' image">
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <a href="{% url 'listing' listing.id %}">
+                        <h2 class="card-title">{{listing.title.capitalize}}</h2>
+                        <p class="card-category">{{listing.category}}</p>
+                        <p class="card-description">{{listing.description|slice:'150'}}</p>
+                        <p class="card-created">{{listing.created}}</p>
+                        </a>
+                    </div>
+                </div>
+                <br> 
+            {% endif %}
+
+      {% endfor %}
+             
+    
 {% endfor %}
 
-{% comment %} {% for category in categories.listing_set.get(id=listing.id) %}
 
-<h3><a href="#">{{ category.title }}</a></h3>
-<br>
-<hr>
-
-{% endfor %} {% endcomment %}
 
 
 {% endblock body %}
