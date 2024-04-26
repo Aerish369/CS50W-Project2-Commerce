@@ -10,20 +10,28 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
-}
+    position: relative;
 
+    margin-top: -30px;
+    text-align: center;
+    margin-left: 515px;
+    /* background-color: green; */
+
+}
+/* 
 .listingimg {
     margin-top: -30px;
     text-align: center;
     margin-left: 515px;
     background-color: transparent;
-}
+} */
 
 .listingimg img{
     max-width: 150%;
     height: auto;
-}
+} 
+
+
 .bid {
     /* background-color: green; */
     margin-right: 10;
@@ -103,10 +111,22 @@ body {
 
 .watchlist {
     position: relative;
-    bottom: 108px;
-    left: 36%;
+    bottom: 58px;
+    left: 28%;
     padding-left: 17px;
     margin-right: 1642px;
+}
+
+.container {
+    /* position: absolute; */
+    /* background-color: grey; */
+
+    /* bottom: 10px;
+    left: 0px;
+    padding-left: 11px;
+    margin-right: 1315px;
+    padding-top: 32px;  */
+
 }
 
 #comment-submit {

@@ -21,8 +21,8 @@
             <div class="card-content">
               <a href="{% url 'listing' listing.id %}">
               <h2 class="card-title">{{listing.title.capitalize}}</h2>
-              <p class="card-category">{{listing.category}}</p>
-              <p class="card-description">{{listing.description|slice:'150'}}</p>
+              <strong><p class="card-category">${{listing.bid_price}}</p></strong>
+              <p class="card-description">{{listing.description|slice:'180'}}..</p>
               <p class="card-created">{{listing.created}}</p>
               </a>
             </div>

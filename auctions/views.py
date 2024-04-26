@@ -129,6 +129,7 @@ def closeListing(request, pk):
         listingObj.is_active = False
         listingObj.save()
         messages.success(request, "Bidding Closed !!! ")
+        return HttpResponseRedirect(reverse('listing', args=(pk,)))
     else:
         return render(request, 'auctions/listing.html', {"listing": listingObj})
 

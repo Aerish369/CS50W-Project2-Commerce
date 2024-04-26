@@ -4,14 +4,10 @@
 {% block title %} Category Listings {%endblock %} 
 
 {% block body %}
-
-<h1>Listings with Categories</h1>
+<h2><b>Category Listings<b></h2>
 <br>
-<hr>
+
 {% for category, listings in listings_with_categories.items %}
-    {% if category.id == selected_category.id %}
-        <h1>{{ selected_category.title }}</h1> 
-    {% endif %}
     
         {% for listing in listings %}
 
@@ -25,7 +21,7 @@
                     <div class="card-content">
                         <a href="{% url 'listing' listing.id %}">
                         <h2 class="card-title">{{listing.title.capitalize}}</h2>
-                        <p class="card-category">{{listing.category}}</p>
+                        <p class="card-category">${{listing.bid_price}}</p>
                         <p class="card-description">{{listing.description|slice:'150'}}</p>
                         <p class="card-created">{{listing.created}}</p>
                         </a>
