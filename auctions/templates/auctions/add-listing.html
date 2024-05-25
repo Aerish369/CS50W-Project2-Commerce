@@ -1,8 +1,11 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
+{% block staticfile %} {% static "auctions/active-listings.css" %} {% endblock %} 
 
 {% block body %}
 
 <h1>Create Active Listing</h1>
+<hr>
 
 <form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}

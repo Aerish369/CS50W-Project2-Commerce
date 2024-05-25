@@ -1,4 +1,8 @@
-{% extends 'auctions/layout.html' %} {% block title %} Active Listings {%endblock %} {% block body %}
+{% extends 'auctions/layout.html' %} 
+{% load static %}
+{% block staticfile %} {% static "auctions/active-listings.css" %} {% endblock %} 
+{% block title %} Active Listings {%endblock %} 
+{% block body %}
 
 <!--See who's the highest Bidder Now for debugging purpuses-->
 {% if listing.highest_bid %}

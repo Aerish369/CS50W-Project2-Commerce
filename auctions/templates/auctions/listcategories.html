@@ -1,20 +1,91 @@
 {% extends 'auctions/layout.html' %} 
 {% load static %}
-{% block title %} Category Listings {%endblock %} 
+{% block title %} Category Listings {%endblock %}
+{% block staticfile %} {% static 'auctions/active-listings.css' %} {% endblock %}
+
 
 {% block body %}
+<style>
+   
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 36px;
+        font-weight: bold;
+        color: #004080;
+        margin-bottom: 20px;
+    }
+    
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    
+    .card-title a {
+        text-decoration: none;
+        color: inherit;
+        transition: color 0.3s ease;
+    }
+    
+    .card-title a:hover {
+        color: #66b2ff;
+    }
+    
+    .btn-primary {
+        background-color: #004080;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        background-color: #66b2ff;
+        transform: scale(1.05);
+    }
+    
+</style>
 
-<h1>Category Listings</h1>
-<br>
-<hr>
+<div class="container mt-5">
+    <h1 class="text-center">Category Listings</h1>
+    <hr>
 
-{% for category in categories %}
+    <div class="row">
+        {% for category in categories %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <a href="{% url 'view-categories' category.id %}" class="text-decoration-none text-dark">{{ category.title }}</a>
+                    </h3>
+                    <a href="{% url 'view-categories' category.id %}" class="btn btn-primary mt-3">View Listings</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
-<h3><a href="{% url 'view-categories' category.id %}">{{ category.title }}</a></h3>
-<br>
-<hr>
-
-{% endfor %}
 
 
-{% endblock body %}
+{% comment %} {% endfor %} {% endcomment %}
+{% endblock %}
+
+

@@ -1,4 +1,6 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
+{% block staticfile %} {% static "auctions/active-listings.css" %} {% endblock %} 
 
 {% block body %}
 
@@ -8,23 +10,31 @@
         <div>{{ message }}</div>
     {% endif %}
 
-    <form action="{% url 'register' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Register">
-    </form>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <form class="form" action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <p class="form-title">Register your account</p>
+            <div class="input-container">
+                <input autofocus type="text" name="username" placeholder="Username">
+                <span></span>
+            </div>
+            <div class="input-container">
+                <input type="email" name="email" placeholder="Email Address">
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <div class="input-container">
+                <input type="password" name="confirmation" placeholder="Confirm Password">
+            </div>
+            <button type="submit" class="submit">Register in</button>
+            <p class="signup-link">
+                Already have account
+                <a href="{% url 'login' %}">Login in</a>
+            </p>
+        </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+    </div>
+
 
 {% endblock %}

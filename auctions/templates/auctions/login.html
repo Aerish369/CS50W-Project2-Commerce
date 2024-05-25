@@ -1,13 +1,13 @@
 {% extends "auctions/layout.html" %}
+{% load static %}
+{% block staticfile %} {% static "auctions/active-listings.css" %} {% endblock %} 
 
 {% block body %}
 
     <h2>Login</h2>
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
-
+    
+{% comment %} 
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -17,8 +17,52 @@
             <input class="form-control" type="password" name="password" placeholder="Password">
         </div>
         <input class="btn btn-primary" type="submit" value="Login">
-    </form>
+    </form> {% endcomment %}
 
-    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    {% comment %} <form class="form" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <p class="form-title">Sign in to your account</p>
+         <div class="input-container">
+           <input type="text" name="username" placeholder="Username" type="text" placeholder="Username">
+           <span>
+           </span>
+       </div>
+       <div class="input-container">
+           <input type="password" name="password" placeholder="Password">
+         </div>
+          <button type="submit" class="submit">
+         Sign in
+       </button>
+ 
+       <p class="signup-link">
+         No account?
+         <a href="{% url 'register' %}">Sign up</a>
+       </p>
+    </form> {% endcomment %}
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <form class="form" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <p class="form-title">Sign in to your account</p>
+            <div class="input-container">
+                <input type="text" name="username" placeholder="Username">
+                <span></span>
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="submit">Sign in</button>
+            <p class="signup-link">
+                No account?
+                <a href="{% url 'register' %}">Sign up</a>
+            </p>
+        </form>
+    </div>
+ 
+
 
 {% endblock %}
