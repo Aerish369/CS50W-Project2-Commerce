@@ -42,51 +42,10 @@
     </head>
 
     <body>
-        {% comment %} <h1>Auctions</h1> {% endcomment %}
-        {% comment %} <div>
-            {% if user.is_authenticated %}
-                Signed in as <strong>{{ user.username }}</strong>.
-            {% else %}
-                Not signed in.
-            {% endif %}
-        </div> {% endcomment %}
-        {% comment %} <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'categories' %}">Categories </a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'view-watchlist' %}">Watchlist </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'create-listing' %}">Create Listings</a>
-            </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-            {% endif %}
-        </ul> {% endcomment %}
-
-
-
-
+        
         <nav class="navbar navbar-expand-lg navbar-dark static-top">
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{% url 'index' %}">
                     <h3 id="logo">Auctions</h3>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

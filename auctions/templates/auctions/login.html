@@ -4,46 +4,17 @@
 
 {% block body %}
 
-    <h2>Login</h2>
-
-    
-{% comment %} 
-    <form action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Login">
-    </form> {% endcomment %}
+    <h2 style="
+    font-size: 36px;font-weight: bold;color: #004080;margin-bottom: 20px;position: relative;
+    left: 49px;">Login</h2>
+    <hr>
 
 
     {% if message %}
         <div>{{ message }}</div>
     {% endif %}
 
-    {% comment %} <form class="form" action="{% url 'login' %}" method="post">
-        {% csrf_token %}
-        <p class="form-title">Sign in to your account</p>
-         <div class="input-container">
-           <input type="text" name="username" placeholder="Username" type="text" placeholder="Username">
-           <span>
-           </span>
-       </div>
-       <div class="input-container">
-           <input type="password" name="password" placeholder="Password">
-         </div>
-          <button type="submit" class="submit">
-         Sign in
-       </button>
- 
-       <p class="signup-link">
-         No account?
-         <a href="{% url 'register' %}">Sign up</a>
-       </p>
-    </form> {% endcomment %}
+  
     <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
         <form class="form" action="{% url 'login' %}" method="post">
             {% csrf_token %}

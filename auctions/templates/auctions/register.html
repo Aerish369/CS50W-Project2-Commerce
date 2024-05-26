@@ -4,14 +4,17 @@
 
 {% block body %}
 
-    <h2>Register</h2>
+    <h2 style="
+    font-size: 36px;font-weight: bold;color: #004080;margin-bottom: 20px;position: relative;
+    left: 49px;">Register</h2>
+    <hr>
 
     {% if message %}
         <div>{{ message }}</div>
     {% endif %}
 
     <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-        <form class="form" action="{% url 'register' %}" method="post">
+        <form class="form" action="{% url 'register' %}" method="post" style="height: 480px">
             {% csrf_token %}
             <p class="form-title">Register your account</p>
             <div class="input-container">
@@ -29,7 +32,7 @@
             </div>
             <button type="submit" class="submit">Register in</button>
             <p class="signup-link">
-                Already have account
+                Already have account?
                 <a href="{% url 'login' %}">Login in</a>
             </p>
         </form>

@@ -7,27 +7,154 @@
 {% block staticfile %} {% static "auctions/active-listings.css" %} {% endblock %}
 
 {% block body %}
-    <h2>Active Listings</h2>
+<style>
+
+  /* Reset some basic styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Card container styling */
+  .card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Image section styling */
+  .image {
+    flex: 0 0 auto;
+    width: 40%;
+  }
+  
+  .image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px 0 0 10px;
+  }
+  
+  /* Card content styling */
+  .card-content {
+    padding: 20px;
+    flex: 1 1 auto;
+    text-align: left;
+    background-color: #fff; /* Removed background color */
+  }
+  
+  .card-content a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Title and price styling */
+  .card-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-price {
+    font-size: 20px;
+    color: #007BFF;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Description and creation date styling */
+  .card-description {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #666;
+  }
+  
+  .card-created {
+    font-size: 14px;
+    color: #999;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .card {
+      flex-direction: column;
+      width: 95%;
+    }
+  
+    .image {
+      width: 100%;
+    }
+  
+    .image img {
+      border-radius: 10px 10px 0 0;
+    }
+  
+    .card-content {
+      padding: 15px;
+    }
+  
+    .card-title {
+      font-size: 20px;
+    }
+  
+    .card-price {
+      font-size: 18px;
+    }
+  
+    .card-description {
+      font-size: 14px;
+    }
+  
+    .card-created {
+      font-size: 12px;
+    }
+  }
+  
+  
+</style>
+
+
+    <h2 style="
+    font-size: 36px;font-weight: bold;color: #004080;margin-bottom: 20px;position: relative;
+    left: 49px;">Active Listings</h2>
     <hr>
 
+
     {% for listing in listings %}
-      {% if listing.is_active == True %}
-        <div class="card">
-            <div class="image">
-              <a href="{% url 'listing' listing.id %}">
-              <img src="{{listing.image.url}}" alt="{{listing.title}}'s' image">
-              </a>
-            </div>
-            <div class="card-content">
-              <a href="{% url 'listing' listing.id %}">
-              <h2 class="card-title">{{listing.title.capitalize}}</h2>
-              <strong><p class="card-category">${{listing.bid_price}}</p></strong>
-              <p class="card-description">{{listing.description|slice:'180'}}..</p>
-              <p class="card-created">{{listing.created}}</p>
-              </a>
-            </div>
+    {% if listing.is_active %}
+      <div class="card">
+        <div class="image">
+          <a href="{% url 'listing' listing.id %}">
+            <img src="{{ listing.image.url }}" alt="{{ listing.title }}'s image">
+          </a>
         </div>
-        <br> 
-      {% endif %}
-    {% endfor %}
+        <div class="card-content">
+          <a href="{% url 'listing' listing.id %}">
+            <h2 class="card-title">{{ listing.title|capfirst }}</h2>
+            <p class="card-price">${{ listing.bid_price }}</p>
+            <p class="card-description">{{ listing.description|slice:'180' }}...</p>
+            <p class="card-created">{{ listing.created }}</p>
+          </a>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+  
+  
+  
+
 {% endblock body %}

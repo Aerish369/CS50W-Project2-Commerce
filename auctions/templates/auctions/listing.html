@@ -1,204 +1,207 @@
-{% extends 'auctions/layout.html' %} 
+{% extends 'auctions/layout.html' %}
 {% load static %}
-{% block staticfile %} {% static "auctions/active-listings.css" %} {% endblock %} 
-{% block title %} Active Listings {%endblock %} 
+{% block staticfile %}{% static "auctions/active-listings.css" %}{% endblock %}
+{% block title %}Active Listings{% endblock %}
 {% block body %}
 
-<!--See who's the highest Bidder Now for debugging purpuses-->
-{% if listing.highest_bid %}
-  <h6>{{listing.highest_bid.bid_owner}}</h6>
-{% endif %}
-{% if listing.highest_bid %}
-  <h6>{{listing.highest_bid.bid_amount}}</h6>
-{% endif %}
+<style>
+
+  .navbar {
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Make sure the container inside the navbar spans the full width */
+.navbar .container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+}
 
 
-<div class="container">
-  <h1>{{listing.title}}</h1>
+  .container-box {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  } 
+
+  h1 {
+      font-size: 36px;
+      font-weight: bold;
+      color: #004080;
+      margin-bottom: 20px;
+  }
+
+  .badge {
+      font-size: 15px;
+      padding: 10px;
+      border-radius: 5px;
+  }
+
+  .listingimg img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bid input[type="text"] {
+      width: 100px;
+  }
+
+  .btn-primary,
+  .btn-danger {
+      transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .btn-primary:hover,
+  .btn-danger:hover {
+      transform: scale(1.05);
+  }
+
+  .alert {
+      border-radius: 10px;
+  }
+
+  .win-bid {
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .comment-container {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+  }
+
+  .list-group-item {
+      background-color: #fff;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+</style>
+
+<!--llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll-->
+
+<div class="container-box mt-5">
+  <h1 class="text-center"><strong>{{ listing.title }}</strong></h1>
 
   {% if listing.category is None %}
-  <strong style="border: 1px;border-radius: 5px ; border-style: solid; font-size: 15px;padding: 5px; background-color: lightgray;"
-    >Category not set</strong
-  >
-
+  <span class="badge badge-secondary">Category not set</span>
   {% else %}
-
-  <strong style="border: 1px;border-radius: 5px ; border-style: solid; font-size: 15px;padding: 5px; background-color: lightgray;"
-    >{{listing.category}}</strong
-  >
+  <span class="badge badge-primary">{{ listing.category }}</span>
   {% endif %}
   <hr>
-  <p>{{listing.description}}</p>
+  <p>{{ listing.description }}</p>
 
-  <div class="listingimg">
-    <img src="{{listing.image.url}}" alt="{{listing.title}}'s image" />
+  <div class="listingimg text-center mb-4">
+    <img src="{{ listing.image.url }}" alt="{{ listing.title }}'s image" class="img-fluid rounded" />
   </div>
 
   {% if request.user.is_authenticated %}
   {% if listing in request.user.watchlist.all %}
-    <div class="watchlist">
+    <div class="watchlist mb-3">
       <form action="{% url 'watchlist' listing.id %}" method="POST">
         {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="Remove from Watchlist" />
       </form>
     </div>
-    {% else %}
-    <div class="watchlist">
-      <form action="{% url 'watchlist' listing.id %}" method="POST" name="">
+  {% else %}
+    <div class="watchlist mb-3">
+      <form action="{% url 'watchlist' listing.id %}" method="POST">
         {% csrf_token %}
         <input class="btn btn-primary" type="submit" value="Add to Watchlist" />
       </form>
     </div>
-  {% endif %} 
-{% endif %}
+  {% endif %}
+  {% endif %}
 
-</div> 
-
-
-
-<!--Bid Section-->
-{% if request.user.id ==  listing.owner.id %}
-    
-    {% if listing.is_active == True %}
-      <!--Close Bid-->
-      <div class="close-bid">
-      <p id="own-listing">You are the owner of this listing and cannot bid on your own listing.</p>
-      <form action="{% url 'close-listing' listing.id %}" method="POST">
+  <!-- Bid Section -->
+  {% if request.user.id == listing.owner.id %}
+    {% if listing.is_active %}
+      <div class="alert alert-info">
+        You are the owner of this listing and cannot bid on your own listing.
+      </div>
+      <form action="{% url 'close-listing' listing.id %}" method="POST" class="mb-4">
         {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="Close Bid" /> 
       </form>
-    </div>
-      {% else %}
-      <h3 id="listing-closed-1" >Listing Closed Successfully! 1</h3>
-      {% if listing.highest_bid.bid_owner %}
-        <h3 id="listing-closed-1" >The Listing is won by {{listing.highest_bid.bid_owner }}</h3>
-      {% endif %}
-
+    {% else %}
+      <div class="alert alert-success">
+        Listing Closed Successfully!
+        {% if listing.highest_bid.bid_owner %}
+          The Listing is won by {{ listing.highest_bid.bid_owner }}
+        {% endif %}
+      </div>
     {% endif %}
-
   {% elif request.user.is_authenticated %}
-    {% if listing.is_active == True %}
-    <!--Bidding Box-->
-      <form action="" method="POST">
+    {% if listing.is_active %}
+      <form action="" method="POST" class="d-flex mb-4">
         {% csrf_token %}
-        <div style="display: flex" class="bid">
-          {% if listing.bid_price is None %}
-
-            <p style="margin-right: 5px" id="dollar">$</p>
-            <input
-              style="width: 60px"
-              maxlength="6"
-              type="text"
-              value="0"
-              name="bid_amount"
-            />
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="dollar">$</span>
+          </div>
+          <input type="text" maxlength="6" class="form-control" name="bid_amount" value="{{ listing.bid_price }}" aria-label="Amount (to the nearest dollar)">
+          <div class="input-group-append">
             <input class="btn btn-primary" type="submit" value="Bid" id="bid-submit" />
-
-            {% else %}
-            <p style="margin-right: 5px" id="dollar">$</p>
-            <input
-              style="width: 60px"
-              maxlength="6"
-              type="text"
-              value="{{listing.bid_price}}"
-              name="bid_amount"
-            />
-            <input class="btn btn-primary" type="submit" value="Bid" id="bid-submit" />
-          {% endif %}
+          </div>
         </div>
       </form>
-      {% else %}
-      <h3 id="listing-closed-2">Listing Closed! 2</h3>
-    {%endif%}
-  
-{% endif %}
-
-
-<!--Winning Bid Logic-->
-
-{% if listing.is_active == False %}
-
-  <div class="win-bid">
-  {% if request.user.id == listing.highest_bid.bid_owner.id and listing.highest_bid.bid_owner %}
-      <h3 id="winner-closing">Congratulations, {{ listing.highest_bid.bid_owner }}!</h3>
-      <h3 id="winner-closing">You have won the bid.</h3>
-      <h3 id="winner-closing">You can purchase the listed item <a href="#">here</a></h3>
-
-    {% elif request.user.is_authenticated == False %}
-      <h3 id="listing-closed-3">Listing is closed.</h3>
-      <h3 id="listing-closed-3">You can login to see other listings <a href="{% url 'login' %}">here</a>.</h3>
-
-  {% endif %}
-  </div>
-  
-
-{% endif %}
-
-<!--Watchlist Section-->
-
-{% comment %} {% if request.user.is_authenticated %}
-  {% if listing in request.user.watchlist.all %}
-    <div class="watchlist">
-      <form action="{% url 'watchlist' listing.id %}" method="POST">
-        {% csrf_token %}
-        <input class="btn btn-danger" type="submit" value="Remove from Watchlist" />
-      </form>
-    </div>
     {% else %}
-    <div class="watchlist">
-      <form action="{% url 'watchlist' listing.id %}" method="POST" name="">
+      <div class="alert alert-warning">Listing Closed!</div>
+    {% endif %}
+  {% endif %}
+
+  <!-- Winning Bid Logic -->
+  {% if not listing.is_active %}
+    <div class="win-bid alert alert-success">
+      {% if request.user.id == listing.highest_bid.bid_owner.id and listing.highest_bid.bid_owner %}
+        <h3>Congratulations, {{ listing.highest_bid.bid_owner }}!</h3>
+        <p>You have won the bid. You can purchase the listed item <a href="#">here</a>.</p>
+      {% elif not request.user.is_authenticated %}
+        <p>Listing is closed. You can login to see other listings <a href="{% url 'login' %}">here</a>.</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <!-- Comments Section -->
+  <h2>Comments</h2>
+  <hr>
+  {% if request.user.is_authenticated %}
+    <div class="comment-container mb-4">
+      <p>Comment as {{ request.user.username }}</p>
+      <form action="{% url 'comment' listing.id %}" method="POST">
         {% csrf_token %}
-        <input class="btn btn-primary" type="submit" value="Add to Watchlist" />
+        <div class="form-group">
+          {% for field in form %}
+            {{ field }}
+          {% endfor %}
+          <input class="btn btn-primary mt-2" type="submit" value="Comment" id="comment-submit"/>
+        </div>
       </form>
     </div>
-  {% endif %} 
-{% endif %} {% endcomment %}
-
-.
-<!--Comments Section-->
-<h2>Comments</h2>
-<hr>
-{% if request.user.is_authenticated %} 
-  <div class="comment-container">
-      <p>Comment as {{ request.user.username }}</p>
-        <form action="{% url 'comment' listing.id %}" method="POST">
-          {% csrf_token %}
-          <div class="form-group">
-            {% for field in form %}
-              {{ field }}
-            {% endfor %} 
-            <input class="btn btn-primary" type="submit" value="Comment" id= "comment-submit"/>
-          </div>
-        </form>
-      {% else %}
-        <p>You must be signed in to comment.</p>
-    </div>
-    {% endif %}  
-  
+  {% else %}
+    <p>You must be signed in to comment.</p>
+  {% endif %}
   <hr>
 
-
-<ul class="list-group">
-  {% for comment in comments %}
-  
-  <li class="list-group-item">
-    <p>By: <strong>{{ comment.owner }}</strong></p>
-    <hr>
-    <p>{{ comment.body }}</p>
-    <br>
-    <p>{{ comment.created }}</p>
-  </li>
- 
-
-  <br>
-  <hr>
-  
+  <ul class="list-group mb-4">
+    {% for comment in comments %}
+      <li class="list-group-item mb-3">
+        <p>By: <strong>{{ comment.owner }}</strong></p>
+        <p>{{ comment.body }}</p>
+        <small class="text-muted">{{ comment.created }}</small>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
-{% endfor %}
-</ul>
-
-
-
-
 
 {% endblock %}

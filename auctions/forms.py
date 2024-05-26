@@ -11,6 +11,12 @@ class ListingsForm(ModelForm):
     widgets = {
             'in_watchlist':forms.CheckboxSelectMultiple(),
         }
+    def __init__(self, *args, **kwargs):
+        super(ListingsForm, self).__init__(*args, **kwargs)
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})
+
 
 class CommentsForm(ModelForm):
     class Meta:
