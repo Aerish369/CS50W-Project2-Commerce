@@ -1,10 +1,26 @@
 
 ## Commerce - CS50W Project 2 
 
+Note: This project was completed as an assignment for CS50W Lecture 2.
+
+### General Info
+
 An eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist". The highest bidder wins the listed item. 
 
 
 
+## Technologies
+
+- python 3.12.3
+- django 5.0.6
+- HTML 5
+- CSS 3
+- Sqlite
+## Features
+
+- List any item and sell it online
+- Buy any listed item by biddig highest
+- Filter listing by categories, add item to watchlist and more
 ## Run locally
 
 Clone the project
@@ -16,7 +32,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd CS50W-Project2-Commerce
+  cd my-project
 ```
 
 Install dependencies
@@ -50,7 +66,7 @@ Start the server
 
 ![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/4ef29c48-d637-4396-ae24-e460b66152c5)
 
-### Categories Page
+### Watchlist Page
 
 ![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/50077515-ff1e-4bf1-8032-586c6d592ff9)
 
@@ -58,5 +74,4 @@ Start the server
 ### Listing won by higgest bidder
 
 ![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/c3d98cb3-f989-42be-9af2-81ea96aaa619)
-
 
