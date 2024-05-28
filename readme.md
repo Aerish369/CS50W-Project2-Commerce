@@ -32,7 +32,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd CS50W-Project2-Commerce
 ```
 
 Install dependencies
@@ -66,7 +66,7 @@ Start the server
 
 ![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/4ef29c48-d637-4396-ae24-e460b66152c5)
 
-### Watchlist Page
+### Categories Page
 
 ![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/50077515-ff1e-4bf1-8032-586c6d592ff9)
 
