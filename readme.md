@@ -16,7 +16,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd CS50W-Project2-Commerce
 ```
 
 Install dependencies
