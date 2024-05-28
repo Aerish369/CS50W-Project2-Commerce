@@ -19,7 +19,7 @@ An eBay-like e-commerce auction site that will allow users to post auction listi
 ## Features
 
 - List any item and sell it online
-- Buy any listed item by biddig highest
+- Buy any listed item by bidding highest
 - Filter listing by categories, add item to watchlist and more
 ## Run locally
 
