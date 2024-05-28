@@ -1,13 +1,62 @@
-[ONGOING - PROJECT]
+
 ## Commerce - CS50W Project 2 
 
-An eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist.”
+An eBay-like e-commerce auction site that will allow users to post auction listings, place bids on listings, comment on those listings, and add listings to a “watchlist". The highest bidder wins the listed item. 
 
 
-## Getting Started
 
-#pip install pillow
+## Run locally
 
-#pip install django
+Clone the project
 
-#More documention yet to be added. 
+```bash
+  git clone https://github.com/Aerish369/CS50W-Project2-Commerce
+```
+
+Go to the project directory
+
+```bash
+  cd my-project
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt
+
+```
+
+Mirgrate the database
+
+```bash
+  python manage.py makemigrations
+  python manage.py migrate
+```
+
+Start the server
+
+```bash
+  python manage.py runserver
+```
+
+
+## Screenshots
+
+### Active Listing Page
+
+![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/f9cf12c9-1575-4440-89a7-92d4af426314)
+
+### Individual Listing Page 
+
+![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/4ef29c48-d637-4396-ae24-e460b66152c5)
+
+### Watchlist Page
+
+![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/50077515-ff1e-4bf1-8032-586c6d592ff9)
+
+
+### Listing won by higgest bidder
+
+![image](https://github.com/Aerish369/CS50W-Project2-Commerce/assets/107682299/c3d98cb3-f989-42be-9af2-81ea96aaa619)
+
+
