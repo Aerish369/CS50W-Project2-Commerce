@@ -1,154 +1,149 @@
 .navbar {
-    position: relative;
-    width: 100%;
-    top: 0;
-    left: 0;
+  position: relative;
+  width: 100%;
+  top: 0;
+  left: 0;
 }
 
 /* Make sure the container inside the navbar spans the full width */
 .navbar .container {
-    width: 100%;
-    max-width: 100%;
-    padding: 0 20px;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 20px;
 }
-
 
 /**/
 .card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow:
-      0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    margin-bottom: 20px;
-    display: flex;
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .image {
-    flex: 0 0 auto;
-    padding-right: 20px;
+  flex: 0 0 auto;
+  padding-right: 20px;
 }
 
-
 .image img {
-    max-width: 266px;
-    max-height: 168px;
-    width: auto;
-    height: auto;
-    display: block;
+  max-width: 266px;
+  max-height: 168px;
+  width: auto;
+  height: auto;
+  display: block;
 }
 
 .card-content {
-    padding: 20px;
-    flex: 1 1 auto;
-    text-align: left; /* Align content to the left */
+  padding: 20px;
+  flex: 1 1 auto;
+  text-align: left; /* Align content to the left */
 }
 .card-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .card-description {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 15px;
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 15px;
 }
 
 .card-category {
-    font-size: 14px;
-    color: #999;
-    margin-bottom: 10px;
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 10px;
 }
 
 .card-created {
-    font-size: 14px;
-    color: #999;
+  font-size: 14px;
+  color: #999;
 }
 
 /* Login From ----------------------------------------------------------------------*/
 
-
 .form {
-    background-color: #fff;
-    display: block;
-    padding: 1rem;
-    max-width: 350px;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    position: relative;
-    bottom: 200px;
-    width: 365px;
-    height: 365px;
+  background-color: #fff;
+  display: block;
+  padding: 1rem;
+  max-width: 350px;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  position: relative;
+  bottom: 200px;
+  width: 365px;
+  height: 365px;
 }
-  
-  
-  .form-title {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 600;
-    text-align: center;
-    color: #000;
-  }
-  
-  .input-container {
-    position: relative;
-  }
-  
-  .input-container input, .form button {
-    outline: none;
-    border: 1px solid #e5e7eb;
-    margin: 8px 0;
-  }
-  
-  .input-container input {
-    background-color: #fff;
-    padding: 1rem;
-    padding-right: 3rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    width: 300px;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  }
-  
-  .submit {
-    display: block;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-    background-color: #4F46E5;
-    color: #ffffff;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 500;
-    width: 100%;
-    border-radius: 0.5rem;
-    text-transform: uppercase;
-  }
-  
-  .signup-link {
-    color: #6B7280;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    text-align: center;
-  }
-  
-  .signup-link a {
-    text-decoration: underline;
-  }
 
+.form-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: #000;
+}
 
+.input-container {
+  position: relative;
+}
+
+.input-container input,
+.form button {
+  outline: none;
+  border: 1px solid #e5e7eb;
+  margin: 8px 0;
+}
+
+.input-container input {
+  background-color: #fff;
+  padding: 1rem;
+  padding-right: 3rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: 300px;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.submit {
+  display: block;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  background-color: #4f46e5;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  width: 100%;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+}
+
+.signup-link {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.signup-link a {
+  text-decoration: underline;
+}
 
 .form-container {
-    /* Adjust these values as needed */
-    width: 50%;
-    max-width: 500px;
+  /* Adjust these values as needed */
+  width: 50%;
+  max-width: 500px;
 }
 
 /* Comment button */
